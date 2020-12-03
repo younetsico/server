@@ -99,7 +99,7 @@ class Search implements ISearch {
 			$searchResult->unsetResult($emailType);
 		}
 
-		return [$searchResult->asArray(), (bool)$hasMoreResults];
+		return [$searchResult->asArray(), $hasMoreResults];
 	}
 
 	public function registerPlugin(array $pluginInfo) {

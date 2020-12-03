@@ -1979,7 +1979,7 @@ class CalDavBackend extends AbstractBackend implements SyncSupport, Subscription
 		if ($syncToken) {
 			$query = "SELECT `uri`, `operation` FROM `*PREFIX*calendarchanges` WHERE `synctoken` >= ? AND `synctoken` < ? AND `calendarid` = ? AND `calendartype` = ? ORDER BY `synctoken`";
 			if ($limit > 0) {
-				$query .= " LIMIT " . (int)$limit;
+				$query .= " LIMIT " . $limit;
 			}
 
 			// Fetching all changes
