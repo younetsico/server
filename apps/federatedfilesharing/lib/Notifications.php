@@ -142,7 +142,7 @@ class Notifications {
 	 * @throws \OC\HintException
 	 * @throws \OC\ServerNotAvailableException
 	 */
-	public function requestReShare($token, $id, $shareId, $remote, $shareWith, $permission, $filename) {
+	public function requestReShare($token, $id, $shareId, $remote, $shareWith, $permission, $filename, $shareType) {
 		$fields = [
 			'shareWith' => $shareWith,
 			'token' => $token,
@@ -154,6 +154,7 @@ class Notifications {
 		$ocmFields['remoteId'] = $id;
 		$ocmFields['localId'] = $shareId;
 		$ocmFields['name'] = $filename;
+		$ocmFields['shareType'] = $shareType;
 
 		$ocmResult = $this->tryOCMEndPoint($remote, $ocmFields, 'reshare');
 		if (is_array($ocmResult) && isset($ocmResult['token']) && isset($ocmResult['providerId'])) {
