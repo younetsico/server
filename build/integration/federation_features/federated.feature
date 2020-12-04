@@ -227,6 +227,21 @@ Feature: federated
     When Downloading file "/sharelocal.txt" with range "bytes=0-18"
     Then Downloaded content should be "This is a testfile."
 
+  Scenario: Reshare a federated shared on the same instance to another cloud id on the same instance
+    And Using server "LOCAL"
+    And user "user0" exists
+    And user "user1" exists
+    And user "user2" exists
+    And User "user0" uploads file "data/textfile.txt" to "/reshare.txt"
+    And User "user0" from server "LOCAL" shares "/reshare.txt" with user "user1" from server "LOCAL"
+    And User "user1" from server "LOCAL" accepts last pending share
+    And User "user1" from server "LOCAL" shares "/reshare.txt" with user "user2" from server "LOCAL"
+    And User "user2" from server "LOCAL" accepts last pending share
+    And Using server "LOCAL"
+    And As an "user2"
+    When Downloading file "/reshare.txt" with range "bytes=0-18"
+    Then Downloaded content should be "This is a testfile."
+
   Scenario: Reshare a federated shared file to a federated user back to the original instance
     Given Using server "REMOTE"
     And user "user1" exists
